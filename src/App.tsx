@@ -11,6 +11,8 @@ import AIAssistant from "./pages/AIAssistant";
 import GeospatialView from "./pages/GeospatialView";
 import SensorMonitoring from "./pages/SensorMonitoring";
 import Reports from "./pages/Reports";
+import Settings from "./pages/Settings";
+import UserManagement from "./pages/UserManagement";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +32,8 @@ const App = () => (
           <Route path="/geospatial" element={<GeospatialView />} />
           <Route path="/sensors" element={<SensorMonitoring />} />
           <Route path="/reports" element={<Reports />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/users" element={<UserManagement />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

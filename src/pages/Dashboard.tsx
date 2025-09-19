@@ -18,39 +18,17 @@ import {
 } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
 
-// Real-time data that updates
-const riskTrendData = [
-  { time: '00:00', risk: 15, confidence: 85 },
-  { time: '04:00', risk: 22, confidence: 78 },
-  { time: '08:00', risk: 45, confidence: 92 },
-  { time: '12:00', risk: 38, confidence: 88 },
-  { time: '16:00', risk: 62, confidence: 76 },
-  { time: '20:00', risk: 28, confidence: 94 },
-  { time: '24:00', risk: 31, confidence: 82 },
-];
-
-const zones = [
-  { id: 'Z-001', name: 'North Pit', status: 'safe', risk: 12, lastUpdate: '2 mins ago' },
-  { id: 'Z-002', name: 'South Pit', status: 'caution', risk: 45, lastUpdate: '1 min ago' },
-  { id: 'Z-003', name: 'East Wall', status: 'danger', risk: 78, lastUpdate: '30 sec ago' },
-  { id: 'Z-004', name: 'West Quarry', status: 'safe', risk: 8, lastUpdate: '3 mins ago' },
-];
-
-const recentAlerts = [
-  { id: 1, type: 'critical', message: 'Ground instability detected in Zone Z-003', time: '2 mins ago', zone: 'East Wall' },
-  { id: 2, type: 'high', message: 'Sensor network disruption in North Pit', time: '15 mins ago', zone: 'North Pit' },
-  { id: 3, type: 'medium', message: 'Weather conditions affecting stability', time: '1 hour ago', zone: 'All Zones' },
-];
-
+const zones = [];
+const recentAlerts = [];
 const quickStats = [
   { title: 'System Uptime', value: '99.94%', change: '+0.02%', icon: Zap, color: 'success' },
-  { title: 'Active Sensors', value: '847/856', change: '-9', icon: Activity, color: 'warning' },
-  { title: 'Predictions Run', value: '12,483', change: '+125', icon: TrendingUp, color: 'info' },
-  { title: 'Risk Score', value: '42/100', change: '+5', icon: AlertTriangle, color: 'danger' },
+  { title: 'Active Sensors', value: '0/0', change: '0', icon: Activity, color: 'warning' },
+  { title: 'Predictions Run', value: '0', change: '0', icon: TrendingUp, color: 'info' },
+  { title: 'Risk Score', value: '0/100', change: '0', icon: AlertTriangle, color: 'danger' },
 ];
 
 export default function Dashboard() {
-  const systemStatus = 'caution'; // safe, caution, danger, critical
+  const systemStatus = 'safe'; // safe, caution, danger, critical
 
   const getStatusColor = (status: string) => {
     switch(status) {
@@ -119,128 +97,70 @@ export default function Dashboard() {
         ))}
       </div>
 
-      {/* Risk Trend Chart */}
-      <Card className="glass-panel">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <TrendingUp className="w-5 h-5" />
-            Risk Trend Analysis (24h)
-          </CardTitle>
-          <CardDescription>
-            AI-powered risk assessment with confidence intervals
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="h-80">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={riskTrendData}>
-                <defs>
-                  <linearGradient id="riskGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="hsl(var(--warning))" stopOpacity={0.3}/>
-                    <stop offset="95%" stopColor="hsl(var(--warning))" stopOpacity={0}/>
-                  </linearGradient>
-                </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                <XAxis dataKey="time" stroke="hsl(var(--muted-foreground))" />
-                <YAxis stroke="hsl(var(--muted-foreground))" />
-                <Tooltip 
-                  contentStyle={{ 
-                    backgroundColor: 'hsl(var(--card))', 
-                    border: '1px solid hsl(var(--border))',
-                    borderRadius: 'var(--radius)'
-                  }} 
-                />
-                <Area 
-                  type="monotone" 
-                  dataKey="risk" 
-                  stroke="hsl(var(--warning))" 
-                  fill="url(#riskGradient)"
-                  strokeWidth={2}
-                />
-                <Line 
-                  type="monotone" 
-                  dataKey="confidence" 
-                  stroke="hsl(var(--success))" 
-                  strokeWidth={2}
-                  dot={false}
-                />
-              </AreaChart>
-            </ResponsiveContainer>
+          {/* Risk Trend Chart */}
+          <Card className="glass-panel">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <TrendingUp className="w-5 h-5" />
+                Risk Trend Analysis (24h)
+              </CardTitle>
+              <CardDescription>
+                AI-powered risk assessment with confidence intervals
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="text-center py-12">
+                <TrendingUp className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                <h3 className="text-lg font-semibold mb-2">No Risk Data Available</h3>
+                <p className="text-muted-foreground">
+                  Connect sensors and configure zones to start tracking risk trends.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Zone Status and Recent Alerts */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Zone Status */}
+            <Card className="glass-panel">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Activity className="w-5 h-5" />
+                  Zone Status
+                </CardTitle>
+                <CardDescription>Real-time monitoring of all mining zones</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="text-center py-12">
+                  <Activity className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                  <h3 className="text-lg font-semibold mb-2">No Zones Configured</h3>
+                  <p className="text-muted-foreground">
+                    Configure mining zones to start monitoring risk levels.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Recent Alerts */}
+            <Card className="glass-panel">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <AlertTriangle className="w-5 h-5" />
+                  Recent Alerts
+                </CardTitle>
+                <CardDescription>Latest system notifications and warnings</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="text-center py-12">
+                  <CheckCircle className="w-12 h-12 text-success mx-auto mb-4" />
+                  <h3 className="text-lg font-semibold mb-2">All Clear</h3>
+                  <p className="text-muted-foreground">
+                    No active alerts. System is operating normally.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
           </div>
-        </CardContent>
-      </Card>
-
-      {/* Zone Status and Recent Alerts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Zone Status */}
-        <Card className="glass-panel">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Activity className="w-5 h-5" />
-              Zone Status
-            </CardTitle>
-            <CardDescription>Real-time monitoring of all mining zones</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {zones.map((zone) => (
-                <div key={zone.id} className="flex items-center justify-between p-3 rounded-lg border border-border/50 hover:bg-muted/20 transition-colors">
-                  <div className="flex items-center gap-3">
-                    <Badge className={getStatusColor(zone.status)}>
-                      {zone.status.toUpperCase()}
-                    </Badge>
-                    <div>
-                      <div className="font-medium">{zone.name}</div>
-                      <div className="text-sm text-muted-foreground">{zone.id}</div>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="font-bold text-lg">{zone.risk}%</div>
-                    <div className="text-xs text-muted-foreground">{zone.lastUpdate}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Recent Alerts */}
-        <Card className="glass-panel">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <AlertTriangle className="w-5 h-5" />
-              Recent Alerts
-            </CardTitle>
-            <CardDescription>Latest system notifications and warnings</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {recentAlerts.map((alert) => (
-                <div key={alert.id} className="p-3 rounded-lg border border-border/50 hover:bg-muted/20 transition-colors">
-                  <div className="flex items-start justify-between mb-2">
-                    <Badge variant={getAlertColor(alert.type) as any}>
-                      {alert.type.toUpperCase()}
-                    </Badge>
-                    <span className="text-xs text-muted-foreground">{alert.time}</span>
-                  </div>
-                  <p className="text-sm mb-1">{alert.message}</p>
-                  <p className="text-xs text-muted-foreground">Zone: {alert.zone}</p>
-                </div>
-              ))}
-            </div>
-            <div className="mt-4 flex gap-2">
-              <Button size="sm" variant="outline" className="flex-1">
-                <Eye className="w-4 h-4 mr-2" />
-                View All
-              </Button>
-              <Button size="sm" variant="outline">
-                <CheckCircle className="w-4 h-4 mr-2" />
-                Acknowledge
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
 
       {/* Quick Actions */}
       <Card className="glass-panel">

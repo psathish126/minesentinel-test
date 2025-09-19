@@ -49,101 +49,15 @@ interface Sensor {
   calibrationDue: string;
 }
 
-const mockSensors: Sensor[] = [
-  {
-    id: 'T-15',
-    name: 'Tilt Sensor East Wall Primary',
-    type: 'tilt',
-    zone: 'Zone Z-003 (East Wall)',
-    status: 'warning',
-    value: '2.5',
-    unit: '°',
-    battery: 85,
-    temperature: 23.5,
-    lastUpdate: '30 seconds ago',
-    coordinates: '34°12\'15"N, 118°15\'30"W',
-    threshold: { min: -1.0, max: 2.0 },
-    calibrationDue: 'In 2 days'
-  },
-  {
-    id: 'V-12',
-    name: 'Ground Vibration North Pit',
-    type: 'vibration',
-    zone: 'Zone Z-001 (North Pit)',
-    status: 'active',
-    value: '0.3',
-    unit: 'm/s²',
-    battery: 92,
-    temperature: 22.1,
-    lastUpdate: '15 seconds ago',
-    coordinates: '34°12\'30"N, 118°15\'45"W',
-    threshold: { min: 0.0, max: 1.5 },
-    calibrationDue: 'In 7 days'
-  },
-  {
-    id: 'C-08',
-    name: 'Crack Monitor East Wall',
-    type: 'crack',
-    zone: 'Zone Z-003 (East Wall)',
-    status: 'warning',
-    value: '15.2',
-    unit: 'cm',
-    battery: 76,
-    temperature: 24.8,
-    lastUpdate: '1 minute ago',
-    coordinates: '34°12\'20"N, 118°15\'25"W',
-    threshold: { min: 0.0, max: 10.0 },
-    calibrationDue: 'In 1 day'
-  },
-  {
-    id: 'WS-01',
-    name: 'Weather Station Central',
-    type: 'weather',
-    zone: 'All Zones',
-    status: 'active',
-    value: '12.5',
-    unit: 'mm/h',
-    battery: 88,
-    temperature: 26.3,
-    lastUpdate: '5 minutes ago',
-    coordinates: '34°12\'25"N, 118°15\'35"W',
-    threshold: { min: 0.0, max: 50.0 },
-    calibrationDue: 'In 14 days'
-  },
-  {
-    id: 'S-23',
-    name: 'Seismic Monitor South',
-    type: 'seismic',
-    zone: 'Zone Z-002 (South Pit)',
-    status: 'offline',
-    value: '--',
-    unit: 'mg',
-    battery: 12,
-    temperature: 0,
-    lastUpdate: '2 hours ago',
-    coordinates: '34°12\'10"N, 118°15\'50"W',
-    threshold: { min: 0.0, max: 500.0 },
-    calibrationDue: 'Overdue'
-  }
-];
+const mockSensors: Sensor[] = [];
 
-const sensorData = [
-  { time: '00:00', vibration: 0.2, tilt: 1.1, crack: 12.5 },
-  { time: '04:00', vibration: 0.3, tilt: 1.3, crack: 13.1 },
-  { time: '08:00', vibration: 0.4, tilt: 1.8, crack: 14.2 },
-  { time: '12:00', vibration: 0.3, tilt: 2.1, crack: 14.8 },
-  { time: '16:00', vibration: 0.5, tilt: 2.5, crack: 15.2 },
-  { time: '20:00', vibration: 0.2, tilt: 2.3, crack: 15.1 },
-  { time: '24:00', vibration: 0.3, tilt: 2.4, crack: 15.2 },
-];
-
-export default function SensorMonitoring() {
+const [sensors, setSensors] = useState<Sensor[]>(mockSensors);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [typeFilter, setTypeFilter] = useState('all');
   const [selectedSensor, setSelectedSensor] = useState<string | null>(null);
 
-  const filteredSensors = mockSensors.filter(sensor => {
+  const filteredSensors = sensors.filter(sensor => {
     const matchesSearch = sensor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          sensor.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          sensor.zone.toLowerCase().includes(searchTerm.toLowerCase());
@@ -185,11 +99,11 @@ export default function SensorMonitoring() {
   };
 
   const sensorStats = {
-    total: mockSensors.length,
-    active: mockSensors.filter(s => s.status === 'active').length,
-    warning: mockSensors.filter(s => s.status === 'warning').length,
-    offline: mockSensors.filter(s => s.status === 'offline').length,
-    batteryLow: mockSensors.filter(s => s.battery < 20).length,
+    total: sensors.length,
+    active: sensors.filter(s => s.status === 'active').length,
+    warning: sensors.filter(s => s.status === 'warning').length,
+    offline: sensors.filter(s => s.status === 'offline').length,
+    batteryLow: sensors.filter(s => s.battery < 20).length,
   };
 
   const handleCalibrate = (sensorId: string) => {
@@ -336,7 +250,25 @@ export default function SensorMonitoring() {
 
         <TabsContent value="sensors" className="space-y-4">
           {/* Sensor Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+          {filteredSensors.length === 0 ? (
+            <Card className="glass-panel">
+              <CardContent className="text-center py-12">
+                <Activity className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                <h3 className="text-lg font-semibold mb-2">No Sensors Found</h3>
+                <p className="text-muted-foreground">
+                  {sensors.length === 0 
+                    ? "Connect sensors to start monitoring your mining operations."
+                    : "No sensors match your current search and filter criteria."
+                  }
+                </p>
+              </CardContent>
+            </Card>
+          ) : (
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+              {/* Sensor cards would be rendered here */}
+            </div>
+          )}
+        </TabsContent>
             {filteredSensors.map((sensor) => (
               <Card key={sensor.id} className="glass-panel hover:bg-muted/10 transition-colors">
                 <CardHeader className="pb-3">

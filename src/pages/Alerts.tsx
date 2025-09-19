@@ -34,63 +34,7 @@ interface Alert {
   actions: string[];
 }
 
-const alertsData: Alert[] = [
-  {
-    id: 'ALT-001',
-    severity: 'critical',
-    title: 'Immediate Rockfall Risk - East Wall',
-    description: 'Multiple sensors detecting severe ground instability. Visible crack expansion of 15cm in last hour.',
-    zone: 'Zone Z-003 (East Wall)',
-    timestamp: '2 minutes ago',
-    sensor: 'Tilt Sensor T-15, Crack Monitor C-08',
-    status: 'active',
-    actions: ['Evacuate Zone Z-003', 'Deploy Emergency Response Team', 'Notify Safety Supervisor']
-  },
-  {
-    id: 'ALT-002',
-    severity: 'high',
-    title: 'Sensor Network Disruption',
-    description: 'Communication lost with 5 ground vibration sensors in North Pit area.',
-    zone: 'Zone Z-001 (North Pit)',
-    timestamp: '15 minutes ago',
-    sensor: 'Vibration Sensors V-12 to V-16',
-    status: 'acknowledged',
-    actions: ['Dispatch Maintenance Team', 'Switch to Backup Sensors', 'Field Inspection']
-  },
-  {
-    id: 'ALT-003',
-    severity: 'medium',
-    title: 'Weather Impact Warning',
-    description: 'Heavy rainfall increasing slope instability risk across all zones.',
-    zone: 'All Zones',
-    timestamp: '1 hour ago',
-    sensor: 'Weather Station WS-01',
-    status: 'acknowledged',
-    actions: ['Increase Monitoring Frequency', 'Review Weather Forecast', 'Prepare Mitigation']
-  },
-  {
-    id: 'ALT-004',
-    severity: 'high',
-    title: 'Crack Propagation Detected',
-    description: 'New crack formation detected in South Pit with 8cm extension in 6 hours.',
-    zone: 'Zone Z-002 (South Pit)',
-    timestamp: '45 minutes ago',
-    sensor: 'Crack Monitor C-12',
-    status: 'active',
-    actions: ['Visual Inspection Required', 'Install Additional Monitors', 'Safety Barrier Setup']
-  },
-  {
-    id: 'ALT-005',
-    severity: 'low',
-    title: 'Routine Sensor Calibration Due',
-    description: 'Scheduled calibration required for tilt sensors in West Quarry.',
-    zone: 'Zone Z-004 (West Quarry)',
-    timestamp: '3 hours ago',
-    sensor: 'Tilt Sensors T-20 to T-25',
-    status: 'resolved',
-    actions: ['Schedule Maintenance', 'Calibration Procedure', 'Update Sensor Registry']
-  }
-];
+const alertsData: Alert[] = [];
 
 export default function Alerts() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -373,17 +317,17 @@ export default function Alerts() {
             ))}
           </div>
 
-          {filteredAlerts.length === 0 && (
-            <div className="text-center py-12">
-              <CheckCircle className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">No Alerts Found</h3>
-              <p className="text-muted-foreground">
-                {searchTerm || severityFilter !== 'all' || statusFilter !== 'all' 
-                  ? 'No alerts match your current filters.' 
-                  : 'All systems are operating normally.'}
-              </p>
-            </div>
-          )}
+              {filteredAlerts.length === 0 && (
+                <div className="text-center py-12">
+                  <CheckCircle className="w-12 h-12 text-success mx-auto mb-4" />
+                  <h3 className="text-lg font-semibold mb-2">No Alerts Found</h3>
+                  <p className="text-muted-foreground">
+                    {searchTerm || severityFilter !== 'all' || statusFilter !== 'all' 
+                      ? 'No alerts match your current filters.' 
+                      : 'All systems are operating normally. No active alerts to display.'}
+                  </p>
+                </div>
+              )}
         </CardContent>
       </Card>
     </DashboardLayout>

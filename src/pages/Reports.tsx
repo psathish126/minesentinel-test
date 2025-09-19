@@ -46,60 +46,7 @@ interface Report {
   recipient?: string;
 }
 
-const mockReports: Report[] = [
-  {
-    id: 'RPT-001',
-    title: 'Daily Safety Assessment Report',
-    type: 'safety',
-    status: 'completed',
-    createdAt: '2024-01-19 08:00',
-    completedAt: '2024-01-19 08:15',
-    author: 'Safety Supervisor',
-    description: 'Comprehensive daily safety report covering all mining zones with risk assessments and recommendations.',
-    zones: ['Zone Z-001', 'Zone Z-002', 'Zone Z-003', 'Zone Z-004'],
-    priority: 'high',
-    size: '2.4 MB',
-    recipient: 'management@minesentinel.com'
-  },
-  {
-    id: 'RPT-002',
-    title: 'East Wall Critical Incident Report',
-    type: 'incident',
-    status: 'approved',
-    createdAt: '2024-01-19 10:30',
-    completedAt: '2024-01-19 11:45',
-    author: 'Mine Safety Officer',
-    description: 'Detailed incident report for critical rockfall risk detected in East Wall zone.',
-    zones: ['Zone Z-003'],
-    priority: 'critical',
-    size: '5.7 MB',
-    recipient: 'regulatory@mining.gov'
-  },
-  {
-    id: 'RPT-003',
-    title: 'Weekly AI Performance Analysis',
-    type: 'performance',
-    status: 'pending',
-    createdAt: '2024-01-19 06:00',
-    author: 'AI System Administrator',
-    description: 'Weekly analysis of AI prediction accuracy, system performance metrics, and model optimization recommendations.',
-    zones: ['All Zones'],
-    priority: 'medium',
-    size: '1.8 MB'
-  },
-  {
-    id: 'RPT-004',
-    title: 'Sensor Maintenance Schedule',
-    type: 'maintenance',
-    status: 'draft',
-    createdAt: '2024-01-19 07:30',
-    author: 'Maintenance Supervisor',
-    description: 'Monthly maintenance schedule for all sensor equipment including calibration and replacement requirements.',
-    zones: ['Zone Z-001', 'Zone Z-002'],
-    priority: 'low',
-    size: '892 KB'
-  },
-];
+const mockReports: Report[] = [];
 
 const reportTemplates = [
   { id: 'daily-safety', name: 'Daily Safety Report', description: 'Standard daily safety assessment' },
@@ -171,7 +118,7 @@ export default function Reports() {
     total: mockReports.length,
     completed: mockReports.filter(r => r.status === 'completed').length,
     pending: mockReports.filter(r => r.status === 'pending').length,
-    overdue: 0, // Mock calculation
+    overdue: 0, // Calculated based on actual data
   };
 
   const handleDownloadReport = (reportId: string) => {

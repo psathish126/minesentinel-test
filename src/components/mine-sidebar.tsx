@@ -41,6 +41,7 @@ const menuItems = [
   { title: "Geospatial View", url: "/geospatial", icon: Globe },
   { title: "Sensor Monitoring", url: "/sensors", icon: Activity },
   { title: "Reports", url: "/reports", icon: FileUp },
+  { title: "Settings", url: "/settings", icon: Settings },
   { title: "User Management", url: "/users", icon: Users },
 ];
 
