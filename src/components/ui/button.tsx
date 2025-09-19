@@ -15,11 +15,18 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        // Industrial Mining Variants
+        industrial: "btn-industrial",
+        danger: "btn-danger",
+        success: "btn-success",
+        warning: "bg-gradient-to-r from-warning/90 to-warning/70 hover:from-warning hover:to-warning/90 text-warning-foreground font-semibold border border-warning/30 glow-warning",
+        critical: "bg-gradient-to-r from-destructive/90 to-destructive/70 hover:from-destructive hover:to-destructive/90 text-destructive-foreground font-bold border border-destructive/50 glow-danger animate-pulse",
       },
       size: {
         default: "h-10 px-4 py-2",
         sm: "h-9 rounded-md px-3",
         lg: "h-11 rounded-md px-8",
+        xl: "h-12 rounded-lg px-12 text-lg",
         icon: "h-10 w-10",
       },
     },

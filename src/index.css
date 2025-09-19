@@ -2,95 +2,113 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Mine Sentinel Industrial Design System - All colors MUST be HSL */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Industrial Dark Theme - Mining Colors */
+    --background: 215 28% 8%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 215 25% 10%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 215 25% 10%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 45 93% 47%;
+    --primary-foreground: 215 28% 8%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 215 20% 15%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 215 20% 12%;
+    --muted-foreground: 215 15% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 142 76% 36%;
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --warning: 45 93% 47%;
+    --warning-foreground: 215 28% 8%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 210 40% 98%;
+
+    --info: 199 89% 48%;
+    --info-foreground: 210 40% 98%;
+
+    --border: 215 20% 18%;
+    --input: 215 20% 15%;
+    --ring: 45 93% 47%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Sidebar Industrial Theme */
+    --sidebar-background: 215 30% 6%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 45 93% 47%;
+    --sidebar-primary-foreground: 215 28% 8%;
+    --sidebar-accent: 215 25% 10%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 215 20% 18%;
+    --sidebar-ring: 45 93% 47%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* Mining Status Colors */
+    --status-safe: 142 76% 36%;
+    --status-caution: 45 93% 47%;
+    --status-danger: 25 95% 53%;
+    --status-critical: 0 84% 60%;
 
-    --sidebar-primary: 240 5.9% 10%;
+    /* Industrial Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(45 93% 47%), hsl(25 95% 53%));
+    --gradient-danger: linear-gradient(135deg, hsl(0 84% 60%), hsl(25 95% 53%));
+    --gradient-success: linear-gradient(135deg, hsl(142 76% 36%), hsl(120 60% 50%));
+    --gradient-industrial: linear-gradient(135deg, hsl(215 28% 8%), hsl(215 25% 10%));
 
-    --sidebar-primary-foreground: 0 0% 98%;
+    /* Mining Shadows */
+    --shadow-industrial: 0 8px 32px hsl(215 28% 4% / 0.6);
+    --shadow-glow-warning: 0 8px 32px hsl(45 93% 47% / 0.3);
+    --shadow-glow-danger: 0 8px 32px hsl(0 84% 60% / 0.3);
+    --shadow-glow-success: 0 8px 32px hsl(142 76% 36% / 0.3);
 
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Animations */
+    --transition-industrial: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --animation-pulse-warning: pulse-warning 2s infinite;
+    --animation-pulse-danger: pulse-danger 1.5s infinite;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    /* Same as root - enforced dark theme */
+    --background: 215 28% 8%;
     --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
+    --card: 215 25% 10%;
     --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
+    --popover: 215 25% 10%;
     --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
+    --primary: 45 93% 47%;
+    --primary-foreground: 215 28% 8%;
+    --secondary: 215 20% 15%;
     --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
+    --muted: 215 20% 12%;
+    --muted-foreground: 215 15% 65%;
+    --accent: 142 76% 36%;
     --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 215 20% 18%;
+    --input: 215 20% 15%;
+    --ring: 45 93% 47%;
+    --sidebar-background: 215 30% 6%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 45 93% 47%;
+    --sidebar-primary-foreground: 215 28% 8%;
+    --sidebar-accent: 215 25% 10%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 215 20% 18%;
+    --sidebar-ring: 45 93% 47%;
   }
 }
 
@@ -100,6 +118,92 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Industrial Typography */
+  .text-industrial-heading {
+    @apply text-2xl font-bold tracking-tight;
+    text-shadow: 0 2px 4px hsl(215 28% 4% / 0.5);
+  }
+
+  .text-industrial-subheading {
+    @apply text-lg font-semibold;
+  }
+
+  /* Status Indicators */
+  .status-safe {
+    @apply bg-gradient-to-r from-green-500/20 to-green-600/20 border-green-500/30;
+    color: hsl(var(--status-safe));
+  }
+
+  .status-caution {
+    @apply bg-gradient-to-r from-yellow-500/20 to-yellow-600/20 border-yellow-500/30;
+    color: hsl(var(--status-caution));
+  }
+
+  .status-danger {
+    @apply bg-gradient-to-r from-orange-500/20 to-orange-600/20 border-orange-500/30;
+    color: hsl(var(--status-danger));
+  }
+
+  .status-critical {
+    @apply bg-gradient-to-r from-red-500/20 to-red-600/20 border-red-500/30;
+    color: hsl(var(--status-critical));
+    animation: var(--animation-pulse-danger);
+  }
+
+  /* Industrial Effects */
+  .glass-panel {
+    @apply bg-card/50 backdrop-blur-sm border border-border/50;
+    box-shadow: var(--shadow-industrial);
+  }
+
+  .glow-warning {
+    box-shadow: var(--shadow-glow-warning);
+  }
+
+  .glow-danger {
+    box-shadow: var(--shadow-glow-danger);
+  }
+
+  .glow-success {
+    box-shadow: var(--shadow-glow-success);
   }
 }
+
+@layer components {
+  /* Industrial Button Variants */
+  .btn-industrial {
+    @apply bg-gradient-to-r from-primary/90 to-primary/70 hover:from-primary hover:to-primary/90;
+    @apply text-primary-foreground font-semibold tracking-wide;
+    @apply border border-primary/30 shadow-lg hover:shadow-xl;
+    @apply transition-all duration-300 transform hover:scale-105;
+  }
+
+  .btn-danger {
+    @apply bg-gradient-to-r from-destructive/90 to-destructive/70 hover:from-destructive hover:to-destructive/90;
+    @apply text-destructive-foreground font-semibold;
+    @apply border border-destructive/30;
+    box-shadow: var(--shadow-glow-danger);
+  }
+
+  .btn-success {
+    @apply bg-gradient-to-r from-accent/90 to-accent/70 hover:from-accent hover:to-accent/90;
+    @apply text-accent-foreground font-semibold;
+    @apply border border-accent/30;
+    box-shadow: var(--shadow-glow-success);
+  }
+}
+
+@keyframes pulse-warning {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes pulse-danger {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.02); }
+}
+
