@@ -51,7 +51,17 @@ interface Sensor {
 
 const mockSensors: Sensor[] = [];
 
-const [sensors, setSensors] = useState<Sensor[]>(mockSensors);
+const sensorData = [
+  { time: '00:00', vibration: 2.1, tilt: 0.5, crack: 0.02 },
+  { time: '04:00', vibration: 2.3, tilt: 0.7, crack: 0.03 },
+  { time: '08:00', vibration: 1.8, tilt: 0.4, crack: 0.02 },
+  { time: '12:00', vibration: 2.5, tilt: 0.8, crack: 0.04 },
+  { time: '16:00', vibration: 2.2, tilt: 0.6, crack: 0.03 },
+  { time: '20:00', vibration: 1.9, tilt: 0.5, crack: 0.02 },
+];
+
+export default function SensorMonitoring() {
+  const [sensors, setSensors] = useState<Sensor[]>(mockSensors);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [typeFilter, setTypeFilter] = useState('all');
@@ -249,7 +259,6 @@ const [sensors, setSensors] = useState<Sensor[]>(mockSensors);
         </TabsList>
 
         <TabsContent value="sensors" className="space-y-4">
-          {/* Sensor Grid */}
           {filteredSensors.length === 0 ? (
             <Card className="glass-panel">
               <CardContent className="text-center py-12">
@@ -265,11 +274,7 @@ const [sensors, setSensors] = useState<Sensor[]>(mockSensors);
             </Card>
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
-              {/* Sensor cards would be rendered here */}
-            </div>
-          )}
-        </TabsContent>
-            {filteredSensors.map((sensor) => (
+              {filteredSensors.map((sensor) => (
               <Card key={sensor.id} className="glass-panel hover:bg-muted/10 transition-colors">
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
@@ -374,18 +379,7 @@ const [sensors, setSensors] = useState<Sensor[]>(mockSensors);
                 </CardContent>
               </Card>
             ))}
-          </div>
-
-          {filteredSensors.length === 0 && (
-            <Card className="glass-panel">
-              <CardContent className="text-center py-12">
-                <Activity className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-                <h3 className="text-lg font-semibold mb-2">No Sensors Found</h3>
-                <p className="text-muted-foreground">
-                  No sensors match your current filters. Try adjusting your search criteria.
-                </p>
-              </CardContent>
-            </Card>
+            </div>
           )}
         </TabsContent>
 
